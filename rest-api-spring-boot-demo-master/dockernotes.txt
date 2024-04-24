@@ -1,0 +1,11 @@
+first make Docketfile in the root of the project
+For Example
+=========================================================
+FROM openjdk:17
+ADD target/artifacts/rest_demo_jar/rest-demo.jar rest-spring-api.jar
+ENTRYPOINT ["java","-jar","rest-spring-api.jar"]
+=========================================================
+NOW write command
+
+docker run -p 3307:3306 --name mysqldbcont -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=cloud_vendor mysql:latest
+
