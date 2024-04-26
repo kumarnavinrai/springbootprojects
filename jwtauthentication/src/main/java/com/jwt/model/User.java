@@ -1,6 +1,9 @@
 package com.jwt.model;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Pattern;
+import javax.validation.constraints.Size;
 
 @Entity
 @Table(name = "USER")
@@ -9,9 +12,18 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+
+    @NotEmpty(message = "Username cannot be empty")
     private String username;
+
+    @NotEmpty(message = "Password cannot be empty")
+    @Size(min = 5, max = 20, message = "Password min length 5 max 20 characters")
+//    @Pattern(regexp = "^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=.*[!@#&()\\[\\]{}:;',?/*~$^+=<>]).{8,16}$", message = "Your password doesn't meet the complexity requirements.")
     private String password;
+
+    @Pattern(regexp = "^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*$", message = "Please enter a valid email address.")
     private String email;
+
     private String rol;
     private boolean enabled;
 

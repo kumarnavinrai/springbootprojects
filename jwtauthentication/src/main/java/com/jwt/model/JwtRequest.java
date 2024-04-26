@@ -1,7 +1,15 @@
 package com.jwt.model;
 
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.Size;
+
 public class JwtRequest {
+
+    @NotEmpty(message = "Username cannot be empty")
     String username;
+
+    @NotEmpty(message = "Password cannot be empty")
+    @Size(min = 5, max = 20, message = "Password min length 5 max 20 characters")
     String password;
 
     public JwtRequest() {

@@ -13,6 +13,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+
 @RestController
 @CrossOrigin(origins = "*")
 public class JwtController {
@@ -28,7 +30,7 @@ public class JwtController {
     private JwtUtil jwtUtil;
 
     @RequestMapping(value = "/token", method = RequestMethod.POST)
-    public ResponseEntity<?> generateToken(@RequestBody JwtRequest jwtRequest) throws Exception {
+    public ResponseEntity<?> generateToken(@Valid @RequestBody JwtRequest jwtRequest) throws Exception {
 
         System.out.println("Inside Controller");
         System.out.println(jwtRequest);
