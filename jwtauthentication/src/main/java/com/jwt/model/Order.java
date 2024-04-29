@@ -1,14 +1,10 @@
 package com.jwt.model;
 
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.math.BigDecimal;
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "orders")
@@ -40,14 +36,6 @@ public class Order {
 
     @NotNull(message = "Order amount cannot be null")
     private BigDecimal orderAmount;
-
-    @CreationTimestamp
-    @Column(name = "created", updatable = false)
-    private LocalDateTime created;
-
-    @UpdateTimestamp
-    @Column(name = "updated")
-    private LocalDateTime updated;
 
     // More properties as per your project requirements
 
@@ -128,22 +116,6 @@ public class Order {
         this.orderAmount = orderAmount;
     }
 
-    public LocalDateTime getCreated() {
-        return created;
-    }
-
-    public void setCreated(LocalDateTime created) {
-        this.created = created;
-    }
-
-    public LocalDateTime getUpdated() {
-        return updated;
-    }
-
-    public void setUpdated(LocalDateTime updated) {
-        this.updated = updated;
-    }
-
     // Add more getters and setters as needed
 
     @Override
@@ -157,8 +129,6 @@ public class Order {
                 ", shippingMethod='" + shippingMethod + '\'' +
                 ", quantity=" + quantity +
                 ", orderAmount=" + orderAmount +
-                ", created=" + created +
-                ", updated=" + updated +
                 '}';
     }
 }
