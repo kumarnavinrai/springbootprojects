@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @RestController
@@ -42,7 +43,7 @@ public class ProductController {
 
     @GetMapping("/name/{name}")
     public Product findById(@PathVariable String name) {
-        return productService.getProductByName(name);
+        return productService.getProductByProductName(name);
     }
 
     // Update a product
@@ -63,5 +64,28 @@ public class ProductController {
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
         productRepository.delete(product);
         return "Product deleted successfully!";
+    }
+
+    @GetMapping("/jpql")
+    public List<Product> jpqlFindAll()
+    {
+        return productService.getAllJPQL();
+    }
+
+    @GetMapping("/jpqlq/{name}")
+    public List<Product> jpqlFindAllJPQL(@PathVariable String name)
+    {
+        return productService.getAllJPQLQueryParam(name);
+    }
+
+    @GetMapping("/jpqlSum/{name}")
+    public Map<String,Double> jpqlFindAllProductSumJPQL(@PathVariable String name)
+    {
+        return productService.getSumOfAllProductWithParticularNameJPQLQueryParam(name);
+    }
+    @GetMapping("/native")
+    public List<Product> jpqlFindAllNative()
+    {
+        return productService.getAllJPQLNative();
     }
 }

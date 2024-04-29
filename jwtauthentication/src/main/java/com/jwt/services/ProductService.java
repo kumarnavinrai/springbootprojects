@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @Service
@@ -29,28 +30,28 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
-    public Product getProductByName(String name){
-        return   productRepository.getProductByName(name);
+    public Product getProductByProductName(String name){
+        return   productRepository.getProductByProductName(name);
 
     }
 
-//    public List<Product> getAllJPQL(){
-//
-//        return productRepository.getAllProductsUsingJPQL();
-//    }
-//
-//    public List<Product> getAllJPQLQueryParam(String name){
-//
-//        return productRepository.getAllProductsUsingJPQLQueryParam(name);
-//    }
-//    public Map<String , Double>getSumOfAllProductWithParticularNameJPQLQueryParam(String name){
-//
-//        return productRepository.getAllProductsPriceUsingJPQLQueryParam(name);
-//    }
+    public List<Product> getAllJPQL(){
 
-//    public List<Product> getAllJPQLNative(){
-//
-//        return productRepository.getAllProductsUsingNative();
-//    }
+        return productRepository.getAllProductsUsingJPQL();
+    }
+
+    public List<Product> getAllJPQLQueryParam(String name){
+
+        return productRepository.getAllProductsUsingJPQLQueryParam(name);
+    }
+    public Map<String , Double> getSumOfAllProductWithParticularNameJPQLQueryParam(String name){
+
+        return productRepository.getAllProductsPriceUsingJPQLQueryParam(name);
+    }
+
+    public List<Product> getAllJPQLNative(){
+
+        return productRepository.getAllProductsUsingNative();
+    }
 
 }
