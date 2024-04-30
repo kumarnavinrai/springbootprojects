@@ -1,10 +1,11 @@
 package com.jwt.controller;
 
 import com.jwt.model.Product;
-
 import com.jwt.repo.ProductRepository;
 import com.jwt.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -24,68 +25,78 @@ public class ProductController {
 
     // Create a new product
     @PostMapping("/products")
-    public Product createProduct(@Valid @RequestBody Product product) {
-        return productRepository.save(product);
+    public ResponseEntity<Product> createProduct(@Valid @RequestBody Product product) {
+        Product savedProduct = productRepository.save(product);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedProduct);
     }
 
     // Read all products
     @GetMapping("/products")
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public ResponseEntity<List<Product>> getAllProducts() {
+        List<Product> products = productRepository.findAll();
+        return ResponseEntity.ok().body(products);
     }
 
     // Read a product by ID
     @GetMapping("/products/{id}")
-    public Optional<Product> getProductById(@PathVariable Long id) {
-        return productRepository.findById(id);
+    public ResponseEntity<Product> getProductById(@PathVariable Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        return product.map(value -> ResponseEntity.ok().body(value))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
 
     @GetMapping("/name/{name}")
-    public Product findById(@PathVariable String name) {
-        return productService.getProductByProductName(name);
+    public ResponseEntity<Product> findById(@PathVariable String name) {
+        Product product = productService.getProductByProductName(name);
+        return ResponseEntity.ok().body(product);
     }
 
     // Update a product
     @PutMapping("/products/{id}")
-    public Product updateProduct(@Valid @PathVariable Long id, @RequestBody Product productDetails) {
+    public ResponseEntity<Product> updateProduct(@Valid @PathVariable Long id, @RequestBody Product productDetails) {
         Product product = productRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
         product.setProductName(productDetails.getProductName());
         product.setDescription(productDetails.getDescription());
         product.setPrice(productDetails.getPrice());
-        return productRepository.save(product);
+        Product updatedProduct = productRepository.save(product);
+        return ResponseEntity.ok().body(updatedProduct);
     }
 
     // Delete a product
     @DeleteMapping("/products/{id}")
-    public String deleteProduct(@PathVariable Long id) {
-        Product product = productRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Product not found with id: " + id));
-        productRepository.delete(product);
-        return "Product deleted successfully!";
+    public ResponseEntity<String> deleteProduct(@PathVariable Long id) {
+        Optional<Product> product = productRepository.findById(id);
+        if (product.isPresent()) {
+            productRepository.delete(product.get());
+            return ResponseEntity.ok().body("Product deleted successfully!");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 
     @GetMapping("/jpql")
-    public List<Product> jpqlFindAll()
-    {
-        return productService.getAllJPQL();
+    public ResponseEntity<List<Product>> jpqlFindAll() {
+        List<Product> products = productService.getAllJPQL();
+        return ResponseEntity.ok().body(products);
     }
 
     @GetMapping("/jpqlq/{name}")
-    public List<Product> jpqlFindAllJPQL(@PathVariable String name)
-    {
-        return productService.getAllJPQLQueryParam(name);
+    public ResponseEntity<List<Product>> jpqlFindAllJPQL(@PathVariable String name) {
+        List<Product> products = productService.getAllJPQLQueryParam(name);
+        return ResponseEntity.ok().body(products);
     }
 
     @GetMapping("/jpqlSum/{name}")
-    public Map<String,Double> jpqlFindAllProductSumJPQL(@PathVariable String name)
-    {
-        return productService.getSumOfAllProductWithParticularNameJPQLQueryParam(name);
+    public ResponseEntity<Map<String, Double>> jpqlFindAllProductSumJPQL(@PathVariable String name) {
+        Map<String, Double> result = productService.getSumOfAllProductWithParticularNameJPQLQueryParam(name);
+        return ResponseEntity.ok().body(result);
     }
+
     @GetMapping("/native")
-    public List<Product> jpqlFindAllNative()
-    {
-        return productService.getAllJPQLNative();
+    public ResponseEntity<List<Product>> jpqlFindAllNative() {
+        List<Product> products = productService.getAllJPQLNative();
+        return ResponseEntity.ok().body(products);
     }
 }

@@ -1,9 +1,10 @@
 package com.jwt.controller;
 
-
 import com.jwt.model.Invoice;
 import com.jwt.repo.InvoiceRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -20,25 +21,29 @@ public class InvoiceController {
 
     // Create a new invoice
     @PostMapping
-    public Invoice createInvoice(@Valid @RequestBody Invoice invoice) {
-        return invoiceRepository.save(invoice);
+    public ResponseEntity<Invoice> createInvoice(@Valid @RequestBody Invoice invoice) {
+        Invoice savedInvoice = invoiceRepository.save(invoice);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedInvoice);
     }
 
     // Read all invoices
     @GetMapping
-    public List<Invoice> getAllInvoices() {
-        return invoiceRepository.findAll();
+    public ResponseEntity<List<Invoice>> getAllInvoices() {
+        List<Invoice> invoices = invoiceRepository.findAll();
+        return ResponseEntity.ok().body(invoices);
     }
 
     // Read an invoice by ID
     @GetMapping("/{id}")
-    public Optional<Invoice> getInvoiceById(@PathVariable Long id) {
-        return invoiceRepository.findById(id);
+    public ResponseEntity<Invoice> getInvoiceById(@PathVariable Long id) {
+        Optional<Invoice> invoice = invoiceRepository.findById(id);
+        return invoice.map(value -> ResponseEntity.ok().body(value))
+                .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     // Update an invoice
     @PutMapping("/{id}")
-    public Invoice updateInvoice(@Valid @PathVariable Long id, @RequestBody Invoice invoiceDetails) {
+    public ResponseEntity<Invoice> updateInvoice(@Valid @PathVariable Long id, @RequestBody Invoice invoiceDetails) {
         Invoice invoice = invoiceRepository.findById(id)
                 .orElseThrow(() -> new RuntimeException("Invoice not found with id: " + id));
         // Update invoice details (replace with your specific fields)
@@ -47,15 +52,19 @@ public class InvoiceController {
         invoice.setDueDate(invoiceDetails.getDueDate());
         invoice.setInvoiceAmount(invoiceDetails.getInvoiceAmount());
         invoice.setStatus(invoiceDetails.getStatus()); // Assuming invoice status (Paid, Unpaid, etc.)
-        return invoiceRepository.save(invoice);
+        Invoice updatedInvoice = invoiceRepository.save(invoice);
+        return ResponseEntity.ok().body(updatedInvoice);
     }
 
     // Delete an invoice
     @DeleteMapping("/{id}")
-    public String deleteInvoice(@PathVariable Long id) {
-        Invoice invoice = invoiceRepository.findById(id)
-                .orElseThrow(() -> new RuntimeException("Invoice not found with id: " + id));
-        invoiceRepository.delete(invoice);
-        return "Invoice deleted successfully!";
+    public ResponseEntity<String> deleteInvoice(@PathVariable Long id) {
+        Optional<Invoice> invoice = invoiceRepository.findById(id);
+        if (invoice.isPresent()) {
+            invoiceRepository.delete(invoice.get());
+            return ResponseEntity.ok().body("Invoice deleted successfully!");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
     }
 }
