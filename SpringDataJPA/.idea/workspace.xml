@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="916a0acf-5a2c-4a77-9347-dd1857f5953b" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../spring-data-many-to-many-main/src/main/java/com/pieropan/springdatamanytomany/entity/Center.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../spring-data-many-to-many-main/src/main/java/com/pieropan/springdatamanytomany/entity/Sevadar.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jwtauthentication/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/../jwtauthentication/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../jwtauthentication/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../jwtauthentication/pom.xml" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 6
+}]]></component>
+  <component name="ProjectId" id="2g4AZm9sqEJKQkWlP8jhycdEMiq" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Application.SpringBootDataJPATestApp.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "/Users/navinkumar/Public/projects/springboot/SpringDataJPA"
+  }
+}]]></component>
+  <component name="RunManager">
+    <configuration name="SpringBootDataJPATestApp" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="org.techtalk.debu.spring.jpa.SpringBootDataJPATestApp" />
+      <module name="SpringData-JPA-Query-Annotation-Example" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="org.techtalk.debu.spring.jpa.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="SpringDataJPA" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="SpringDataJPA" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.SpringBootDataJPATestApp" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="916a0acf-5a2c-4a77-9347-dd1857f5953b" name="Changes" comment="" />
+      <created>1714946535014</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1714946535014</updated>
+    </task>
+    <servers />
+  </component>
+</project>
